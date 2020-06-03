@@ -1,39 +1,32 @@
 <?php
 
-namespace App;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-
-class User extends Authenticatable
+class CreateTableAuthors extends Migration
 {
-    use Notifiable;
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('authors', function (Blueprint $table) {
+            $table->id();
+            $table->string("author_name");
+            $table->timestamps();
+        });
+    }
 
     /**
-     * The attributes that are mass assignable.
+     * Reverse the migrations.
      *
-     * @var array
+     * @return void
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function down()
+    {
+        Schema::dropIfExists('authors');
+    }
 }
